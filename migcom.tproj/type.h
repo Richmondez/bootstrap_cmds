@@ -40,11 +40,7 @@
 #include <mach/boolean.h>
 #include "strdefs.h"
 
-#ifdef linux
-#include <linux/types.h>
-#else /* linux */
 #include <sys/types.h>
-#endif /* linux */
 typedef u_int ipc_flags_t;
 
 /*
@@ -226,7 +222,7 @@ enum {
 
 #define itNULL ((ipc_type_t *) 0)
 
-#define itWordAlign     sizeof(natural_t)
+#define itWordAlign     sizeof(unsigned int)
 
 extern ipc_type_t *itLookUp(identifier_t name);
 extern void itInsert(identifier_t name, ipc_type_t *it);

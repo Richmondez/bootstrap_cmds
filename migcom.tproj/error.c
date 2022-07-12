@@ -53,6 +53,10 @@
 #include "global.h"
 #include "error.h"
 
+#ifndef __clang__
+#define __private_extern__ __attribute__((visibility("hidden")))
+#endif
+
 extern int lineno;
 extern char *yyinname;
 

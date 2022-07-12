@@ -93,7 +93,7 @@ cppflags="-D__MACH30__"
 files=
 arch=`/usr/bin/arch`
 
-WORKTMP=`/usr/bin/mktemp -d "${TMPDIR:-/tmp}/mig.XXXXXX"`
+WORKTMP=`mktemp -d "${TMPDIR:-/tmp}/mig.XXXXXX"`
 if [ $? -ne 0 ]; then
       echo "Failure creating temporary work directory: ${WORKTMP}"
       echo "Exiting..."
@@ -168,7 +168,7 @@ do
     fi
     rm -f "${temp}.c" "${temp}.d"
     (echo '#line 1 '\"${file}\" ; cat "${file}" ) > "${temp}.c"
-    "$C" -E -arch ${arch} "${target[@]}" "${cppflags[@]}" -I "${sourcedir}" "${iSysRootParm[@]}" "${temp}.c" | "$M" "${migflags[@]}"
+    "$C" -E "${target[@]}" "${cppflags[@]}" -I "${sourcedir}" "${temp}.c" | "$M" "${migflags[@]}"
     if [ $? -ne 0 ]
     then
       rm -rf "${temp}.c" "${temp}.d" "${WORKTMP}"
